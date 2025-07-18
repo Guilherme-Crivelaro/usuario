@@ -1,4 +1,4 @@
-package com.Guilherme.usuario;
+package com.guilherme.usuario;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
