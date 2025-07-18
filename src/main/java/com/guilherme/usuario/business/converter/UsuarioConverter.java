@@ -39,8 +39,13 @@ public class UsuarioConverter {
     }
 
     public List<Telefone> paraListTelefone(List<TelefoneDTO> telefoneDTOS){
-        return telefoneDTOS.stream().map(this::paraTelefone).toList();
+        return java.util.Optional.ofNullable(telefoneDTOS)
+                .orElse(java.util.Collections.emptyList())
+                .stream()
+                .map(this::paraTelefone)
+                .toList();
     }
+
 
     public Telefone paraTelefone(TelefoneDTO telefoneDTO){
         return Telefone.builder()
@@ -85,5 +90,6 @@ public class UsuarioConverter {
                 .numero(telefoneDTO.getNumero())
                 .build();
     }
+
 
 }
