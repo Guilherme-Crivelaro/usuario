@@ -124,4 +124,27 @@ public class UsuarioConverter {
                 .ddd(dto.getDdd() != null ? dto.getDdd() : entity.getDdd())
                 .build();
     }
+
+    public Endereco paraEnderecoEntity(EnderecoDTO dto, Long usuarioId){
+        return Endereco.builder()
+                .rua(dto.getRua())
+                .cidade(dto.getCidade())
+                .estado(dto.getEstado())
+                .cep(dto.getCep())
+                .complemento(dto.getComplemento())
+                .numero(dto.getNumero())
+                .usuario_id(usuarioId)
+                .build();
+    }
+
+    public Telefone paraTelefoneEntity(TelefoneDTO dto, Long usuarioId){
+        return Telefone.builder()
+                .ddd(dto.getDdd())
+                .numero(dto.getNumero())
+                .usuario_id(usuarioId)
+                .build();
+    }
+
+
+
 }
