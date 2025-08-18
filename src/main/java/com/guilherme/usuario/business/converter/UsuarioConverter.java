@@ -18,8 +18,8 @@ public class UsuarioConverter {
                 .nome(usuarioDTO.getNome())
                 .email(usuarioDTO.getEmail())
                 .senha(usuarioDTO.getSenha())
-                .enderecos(paraListEndereco(usuarioDTO.getEnderecos()))
-                .telefone(paraListTelefone(usuarioDTO.getTelefones()))
+                .enderecos(usuarioDTO.getEnderecos() != null ? paraListEndereco(usuarioDTO.getEnderecos()): null)
+                .telefone(usuarioDTO.getTelefones() != null ? paraListTelefone(usuarioDTO.getTelefones()): null)
                 .build();
     }
 
@@ -39,11 +39,7 @@ public class UsuarioConverter {
     }
 
     public List<Telefone> paraListTelefone(List<TelefoneDTO> telefoneDTOS){
-        return java.util.Optional.ofNullable(telefoneDTOS)
-                .orElse(java.util.Collections.emptyList())
-                .stream()
-                .map(this::paraTelefone)
-                .toList();
+        return telefoneDTOS.stream().map(this::paraTelefone).toList();
     }
 
 
@@ -60,8 +56,8 @@ public class UsuarioConverter {
                 .nome(usuarioDTO.getNome())
                 .email(usuarioDTO.getEmail())
                 .senha(usuarioDTO.getSenha())
-                .enderecos(paraListEnderecoDTO(usuarioDTO.getEnderecos()))
-                .telefones(paraListTelefoneDTO(usuarioDTO.getTelefone()))
+                .enderecos(usuarioDTO.getEnderecos() != null ? paraListEnderecoDTO(usuarioDTO.getEnderecos()): null)
+                .telefones(usuarioDTO.getTelefone() != null ? paraListTelefoneDTO(usuarioDTO.getTelefone()): null)
                 .build();
     }
 
