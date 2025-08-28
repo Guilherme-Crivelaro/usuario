@@ -4,6 +4,8 @@ import com.guilherme.usuario.business.UsuarioService;
 import com.guilherme.usuario.business.dto.EnderecoDTO;
 import com.guilherme.usuario.business.dto.TelefoneDTO;
 import com.guilherme.usuario.business.dto.UsuarioDTO;
+import com.guilherme.usuario.infrastructure.Client.ViaCepClient;
+import com.guilherme.usuario.infrastructure.Client.ViaCepDTO;
 import com.guilherme.usuario.infrastructure.security.JwtUtil;
 import com.guilherme.usuario.infrastructure.security.SecurityConfig;
 import io.swagger.v3.oas.annotations.Operation;
@@ -27,6 +29,7 @@ public class UsuarioController {
     private final UsuarioService usuarioService;
     private final JwtUtil jwtUtil;
     private final AuthenticationManager authenticationManager;
+    private final ViaCepClient viaCepClient;
 
     @PostMapping
     @Operation(summary = "Salvar Usuario", description = "Cria um novo usuario")
@@ -127,6 +130,11 @@ public class UsuarioController {
     public ResponseEntity<TelefoneDTO> cadastraTelefone(@RequestBody TelefoneDTO dto,
                                                         @RequestHeader("Authorization") String token){
         return ResponseEntity.ok(usuarioService.cadastraTelefone(token, dto));
+    }
+
+    @GetMapping("/endereco/{cep}")
+    public ResponseEntity<ViaCepDTO> buscarDadosCep(@PathVariable("cep") String cep){
+        return ResponseEntity.ok(viaCepClient.buscaDadosEndereco(cep));
     }
 
 }
